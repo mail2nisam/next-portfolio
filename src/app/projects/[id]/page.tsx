@@ -2,63 +2,96 @@ import { Footer } from "@app/app/components/Footer";
 import { Navbar } from "@app/app/components/Navbar";
 import { ArrowLeft, Github } from "lucide-react";
 import Link from "next/link";
+import { JSX } from "react";
+
+// Define the Project type with id as a number.
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  techStack: string[];
+  features: string[];
+  github?: string;
+  liveDemo?: string;
+  duration: string;
+}
+
+// Define PageProps so that params is a Promise.
+export interface PageProps {
+  params: Promise<{ id: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+}
 
 // Dummy function simulating data retrieval.
-// Replace this with your actual data fetching logic.
-async function getProjectById(id) {
-  const projects = [
+async function getProjectById(id: number): Promise<Project | undefined> {
+  const projects: Project[] = [
     {
-      id: "1",
+      id: 1,
       title: "Scalable API Platform",
-      description: "A high-performance API platform that enhances response times and system reliability by leveraging Ruby on Rails, microservices architecture, and Redis-based queues.",
-      techStack: ["Ruby on Rails", "Laravel", "Redis", "Sidekiq", "Jenkins", "GitHub Actions"],
+      description:
+        "A high-performance API platform that enhances response times and system reliability by leveraging Ruby on Rails, microservices architecture, and Redis-based queues.",
+      techStack: [
+        "Ruby on Rails",
+        "Laravel",
+        "Redis",
+        "Sidekiq",
+        "Jenkins",
+        "GitHub Actions",
+      ],
       features: [
         "Optimized API response times",
         "Microservices design",
-        "CI/CD integration"
+        "CI/CD integration",
       ],
       github: "https://github.com/yourusername/scalable-api-platform",
       liveDemo: "https://api-platform.example.com",
-      duration: "2023 - Present"
+      duration: "2023 - Present",
     },
     {
-      id: "2",
+      id: 2,
       title: "Unified Data Platform",
-      description: "Engineered a data-centric platform that streamlines content delivery and enhances service modularity through GraphQL endpoints and BFF architecture.",
+      description:
+        "Engineered a data-centric platform that streamlines content delivery and enhances service modularity through GraphQL endpoints and BFF architecture.",
       techStack: ["Node.js", "GraphQL", "React", "Contentful", "Docker"],
       features: [
         "Aggregated data via GraphQL",
         "BFF for optimized data retrieval",
-        "Dynamic content management"
+        "Dynamic content management",
       ],
       github: "https://github.com/yourusername/unified-data-platform",
       liveDemo: "https://data-platform.example.com",
-      duration: "Aug 2022 - Dec 2022"
+      duration: "Aug 2022 - Dec 2022",
     },
     {
-      id: "3",
+      id: 3,
       title: "Cloud Data Operator",
-      description: "Implemented a Redis operator within a cloud data ecosystem to optimize processing and improve system responsiveness in high-demand environments.",
+      description:
+        "Implemented a Redis operator within a cloud data ecosystem to optimize processing and improve system responsiveness in high-demand environments.",
       techStack: ["Redis", "Cloud Pak for Data", "Node.js"],
       features: [
         "Optimized data retrieval",
         "Seamless cloud integration",
-        "Enhanced system performance"
+        "Enhanced system performance",
       ],
       github: "https://github.com/yourusername/cloud-data-operator",
       liveDemo: "https://cloud-operator.example.com",
-      duration: "IBM Experience"
-    }
+      duration: "IBM Experience",
+    },
   ];
   
   return projects.find((project) => project.id === id);
 }
 
-export default async function ProjectDetails({ params }) {
-  const project = await getProjectById(params.id);
+export default async function ProjectDetails({
+  params,
+}: PageProps): Promise<JSX.Element> {
+  // Await the params to get the resolved object
+  const resolvedParams = await params;
+  const projectId = parseInt(resolvedParams.id, 10);
+  const project = await getProjectById(projectId);
 
   if (!project) {
-    // You can replace this with a custom 404 component if needed.
+    // Replace this with a custom 404 component if needed.
     return (
       <div className="min-h-screen">
         <Navbar />

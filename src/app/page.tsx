@@ -1,5 +1,6 @@
 import { Footer } from "./components/Footer";
 import { Navbar } from "./components/Navbar";
+import Link from "next/link";
 
 export default function Home() {
   const featuredSkills = [
@@ -64,7 +65,7 @@ export default function Home() {
                 What Drives Me
               </h2>
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed font-mono">
-                I thrive on solving complex problems and delivering elegant solutions. Whether it's optimizing a critical API endpoint
+                I thrive on solving complex problems and delivering elegant solutions. Whether it&apos;s optimizing a critical API endpoint
                 or architecting a scalable microservices ecosystem, my goal is to drive innovation and efficiency. Collaboration,
                 continuous learning, and a passion for cutting-edge technologies are at the heart of everything I do.
               </p>
@@ -73,13 +74,13 @@ export default function Home() {
 
           {/* CTA Section */}
           <div className="text-center mt-16">
-            <a
+            <Link
               href="/projects"
               className="inline-flex items-center gap-2 px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-mono"
             >
               <span>Explore My Work</span>
               <span className="text-lg">→</span>
-            </a>
+            </Link>
           </div>
         </div>
       </main>

@@ -1,13 +1,17 @@
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
+import Link from "next/link";
 
 export default function SkillsPage() {
   const coreTechnologies = [
-    { name: "Ruby on Rails", level: "Expert", years: 10 },
+    { name: "Laravel", level: "Expert", years: 9 },
+    { name: "REST API", level: "Advanced", years: 9 },
+    { name: "Ruby on Rails", level: "Expert", years: 5 },
     { name: "React", level: "Expert", years: 5 },
+    { name: "Dcoker", level: "Expert", years: 5 },
+    { name: "VueJs", level: "Expert", years: 3 },
     { name: "Node.js", level: "Advanced", years: 4 },
     { name: "GraphQL", level: "Advanced", years: 3 },
-    { name: "AWS", level: "Advanced", years: 4 },
   ];
 
   const technologyMap = [
@@ -40,7 +44,7 @@ export default function SkillsPage() {
             <h2 className="text-2xl font-bold mb-6 font-mono">
               Core Competencies
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {coreTechnologies.map((tech, index) => (
                 <div 
                   key={index}
@@ -108,13 +112,13 @@ export default function SkillsPage() {
 
           {/* CTA */}
           <div className="text-center mt-16">
-            <a
+            <Link
               href="/projects"
               className="inline-flex items-center gap-2 px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-mono"
             >
               <span>See These in Action</span>
               <span className="text-lg">→</span>
-            </a>
+            </Link>
           </div>
         </div>
       </main>
